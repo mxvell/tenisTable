@@ -25,4 +25,5 @@ public class Match {
     @JoinColumn(name = "Winner",nullable = false)
     private Player winner;
 
+
 }
