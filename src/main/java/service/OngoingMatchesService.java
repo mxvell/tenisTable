@@ -1,32 +1,38 @@
 package service;
 
-import entities.MatchScore;
-import entities.OngoingMatch;
 import entities.Player;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
-import javax.crypto.Mac;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
-    private final Map<String, OngoingMatch>matches = new HashMap<>();
 
-    public String createMatch(Player player1, Player player2) {
-        String uuid = UUID.randomUUID().toString();
-        matches.put(uuid, new OngoingMatch(player1, player2));
-        return uuid;
+    private static final OngoingMatchesService INSTANCE = new OngoingMatchesService();
+    private final Map<UUID, CurrentMatch>currentMatches = new ConcurrentHashMap<>();
+
+    public OngoingMatchesService() {
+
     }
 
-    public OngoingMatch getMatch(String uuid) {
-        return matches.get(uuid);
+    public static OngoingMatchesService getOngoingMatchesService() {
+        return INSTANCE;
     }
 
-    public void removeMatch(String uuid) {
-        matches.remove(uuid);
+    public void createNewMatch(UUID uuid, Player firstPlayer, Player secondPlayer, int setsInMatch) {
+        CurrentMatch currentMatch = new CurrentMatch(uuid, firstPlayer, secondPlayer, setsInMatch);
+        currentMatches.put(uuid, currentMatch);
+
     }
+
+    public void remove(UUID uuid) {
+        currentMatches.remove(uuid);
+    }
+
+    public CurrentMatch getCurrentMatch(UUID uuid) {
+        return currentMatches.get(uuid);
+    }
+
 }

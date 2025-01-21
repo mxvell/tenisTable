@@ -1,11 +1,11 @@
 package entities;
 
 import lombok.*;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 
 @Entity
-@Table(name = "Players")
+@Table(name = "Player")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,6 +15,10 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true, nullable = false, name = "Name")
+    @Column(unique = true, nullable = false, name = "name")
     private String name;
+
+    public Player(String name) {
+        this.name = name;
+    }
 }

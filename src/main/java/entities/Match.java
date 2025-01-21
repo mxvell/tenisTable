@@ -1,11 +1,12 @@
 package entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 
 @Entity
-@Table(name = "Matches")
+@Table(name = "Match")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,14 +17,18 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "Player1",nullable = false)
+    @JoinColumn(name = "player1",nullable = false)
     private Player player1;
     @ManyToOne
-    @JoinColumn(name = "Player2",nullable = false)
+    @JoinColumn(name = "player2",nullable = false)
     private Player player2;
     @ManyToOne
-    @JoinColumn(name = "Winner",nullable = false)
+    @JoinColumn(name = "winner",nullable = false)
     private Player winner;
 
-
+    public Match(Player player1, Player player2, Player winner) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.winner = winner;
+    }
 }
