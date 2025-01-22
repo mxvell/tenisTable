@@ -5,42 +5,44 @@
   Time: 12:54
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>New Match - Tennis Scoreboard</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <title>Новый матч</title>
+    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <h1>Start New Match</h1>
-
-    <% if (request.getAttribute("error") != null) { %>
-    <div class="error-message">
-        <%= request.getAttribute("error") %>
-    </div>
-    <% } %>
-
-    <form method="post" action="${pageContext.request.contextPath}/new-match" class="match-form">
-        <div class="form-group">
-            <label for="player1">Player 1:</label>
-            <input type="text" id="player1" name="player1" required
-                   value="${param.player1}" placeholder="Enter player 1 name">
+<header>
+    <div class="container bc-lightgray">
+        <div class="table-header p-20">
+            <span class="h1">Новый матч</span>
         </div>
-
-        <div class="form-group">
-            <label for="player2">Player 2:</label>
-            <input type="text" id="player2" name="player2" required
-                   value="${param.player2}" placeholder="Enter player 2 name">
-        </div>
-
-        <button type="submit" class="btn-primary">Start Match</button>
-    </form>
-
-    <div class="back-link">
-        <a href="${pageContext.request.contextPath}/">Back to Home</a>
     </div>
-</div>
+</header>
+<section>
+    <div class="container">
+        <div class="main">
+            <form action="new-match" method="post">
+                <div class="">
+                    <input type="text" placeholder="Player #1 Name" id="1" name="player-1" required/>
+                </div>
+                <div class="">
+                    <input type="text" placeholder="Player #2 Name" id="2" name="player-2" required/>
+                </div>
+                <div class="" style="padding-top: 5px">
+                    <select class="form-select" id="match-sets" name="match-sets" required>
+                        <option value="">--Please select the quantity of sets in the match--</option>
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="card_button">Start game</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
 </body>
 </html>

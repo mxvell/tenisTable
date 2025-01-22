@@ -16,7 +16,7 @@ public class SetScore extends Score<Integer> {
     }
 
     @Override
-    State pointWon(int playerNumber) {
+    public State pointWon(int playerNumber) {
         State gameState = currentGame.pointWon(playerNumber);
         if (gameState == State.PLAYER_ONE_WON) {
             return gameWon(playerNumber);

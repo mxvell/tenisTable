@@ -28,7 +28,7 @@ public class MatchScore extends Score<Integer> {
     }
 
     @Override
-    State pointWon(int playerNumber) {
+    public State pointWon(int playerNumber) {
         State setState = currentSet.pointWon(playerNumber);
 
         if (setState == State.PLAYER_ONE_WON) {

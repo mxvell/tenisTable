@@ -5,57 +5,44 @@
   Time: 12:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Match Score - Tennis Scoreboard</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <title>Новый матч</title>
+    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <h1>Match Score</h1>
-
-    <div class="score-board">
-        <div class="player-info">
-            <h2>${match.player1.name}</h2>
-            <p>Sets: ${score.player1Sets}</p>
-            <p>Games: ${score.currentSetPlayer1Games}</p>
-            <p>Current Game: ${score.currentGameScore}</p>
-        </div>
-
-        <div class="player-info">
-            <h2>${match.player2.name}</h2>
-            <p>Sets: ${score.player2Sets}</p>
-            <p>Games: ${score.currentSetPlayer2Games}</p>
+<header>
+    <div class="container bc-lightgray">
+        <div class="table-header p-20">
+            <span class="h1">Новый матч</span>
         </div>
     </div>
-
-    <% if (!score.isFinished()) { %>
-    <div class="score-controls">
-        <form method="post" action="${pageContext.request.contextPath}/match-score">
-            <input type="hidden" name="uuid" value="${param.uuid}">
-            <input type="hidden" name="winner" value="player1">
-            <button type="submit" class="btn-primary">Player 1 Won Point</button>
-        </form>
-
-        <form method="post" action="${pageContext.request.contextPath}/match-score">
-            <input type="hidden" name="uuid" value="${param.uuid}">
-            <input type="hidden" name="winner" value="player2">
-            <button type="submit" class="btn-primary">Player 2 Won Point</button>
-        </form>
+</header>
+<section>
+    <div class="container">
+        <div class="main">
+            <form action="new-match" method="post">
+                <div class="">
+                    <input type="text" placeholder="Player #1 Name" id="1" name="player-1" required/>
+                </div>
+                <div class="">
+                    <input type="text" placeholder="Player #2 Name" id="2" name="player-2" required/>
+                </div>
+                <div class="" style="padding-top: 5px">
+                    <select class="form-select" id="match-sets" name="match-sets" required>
+                        <option value="">--Please select the quantity of sets in the match--</option>
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="card_button">Start game</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <% } else { %>
-    <div class="match-finished">
-        <h2>Match Finished!</h2>
-        <p>Winner: ${score.winner.name}</p>
-        <a href="${pageContext.request.contextPath}/new-match" class="btn-primary">Start New Match</a>
-    </div>
-    <% } %>
+</section>
 
-    <div class="back-link">
-        <a href="${pageContext.request.contextPath}/">Back to Home</a>
-    </div>
-</div>
 </body>
 </html>

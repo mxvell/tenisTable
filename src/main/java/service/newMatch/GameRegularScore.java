@@ -7,7 +7,7 @@ public class GameRegularScore extends GameScore<GameRegularPlayerPoints> {
     }
 
     @Override
-    State pointWon(int playerNumber) {
+    public State pointWon(int playerNumber) {
         GameRegularPlayerPoints playerScore = getPlayerScores(playerNumber);
         if (playerScore.ordinal() <= GameRegularPlayerPoints.THIRTY.ordinal()) {
             setPlayerScores(playerNumber, playerScore.next());

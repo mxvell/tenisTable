@@ -7,7 +7,7 @@ public class GameTieBreakScore extends GameScore<Integer> {
     }
 
     @Override
-    State pointWon(int playerNumber) {
+    public State pointWon(int playerNumber) {
         setPlayerScores(playerNumber, getPlayerScores(playerNumber) + 1);
 
         if (getPlayerScores(playerNumber) > 6 && (getPlayerScores(playerNumber) - getOppositePlayerScores(playerNumber)) > 1) {
